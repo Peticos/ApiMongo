@@ -1,0 +1,9 @@
+spring.application.name=ApiMongoPeticos
+mongodb+srv://admin:X955pJ8YkBMrVMG@peticos.ajboj.mongodb.net/Peticos?retryWrites=true&w=majority&appName=Peticos
+server.port=8080
+
+logging.level.org.springframework.data.mongodb.core.MongoTemplate=DEBUG
+logging.level.org.mongodb.driver=INFO
+
+
+
