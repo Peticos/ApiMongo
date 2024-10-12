@@ -16,12 +16,12 @@ public class PersonalizationController {
     @Autowired
     private PersonalizationService service;
 
-    @GetMapping
+    @GetMapping("/getall")
     public List<Personalization> getAll() {
         return service.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getbyid/{id}")
     public ResponseEntity<Personalization> getById(@PathVariable Long id) {
         Optional<Personalization> personalization = service.findById(id);
         if (personalization.isPresent()) {
@@ -31,12 +31,12 @@ public class PersonalizationController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/insert")
     public Personalization create(@RequestBody Personalization personalization) {
         return service.save(personalization);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Personalization> update(@PathVariable Long id, @RequestBody Personalization personalization) {
         try {
             Personalization updatedPersonalization = service.update(id, personalization);
@@ -46,7 +46,7 @@ public class PersonalizationController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
