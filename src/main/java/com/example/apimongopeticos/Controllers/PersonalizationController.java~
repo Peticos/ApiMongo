@@ -1,0 +1,59 @@
+package com.example.apimongopeticos.Controllers;
+
+import com.example.apimongopeticos.Models.ApiResponseMongo;
+import com.example.apimongopeticos.Models.Personalization;
+import com.example.apimongopeticos.Service.PersonalizationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/personalizations")
+public class PersonalizationController {
+
+    @Autowired
+    private PersonalizationService service;
+
+    @GetMapping("/getall")
+    public List<Personalization> getAll() {
+        return service.findAll();
+    }
+
+    @GetMapping("/getbyid/{id}")
+    public ResponseEntity<Personalization> getById(@PathVariable Long id) {
+        Optional<Personalization> personalization = service.findById(id);
+        if (personalization.isPresent()) {
+            return ResponseEntity.ok(personalization.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/insert")
+    public ResponseEntity<ApiResponseMongo> create(@RequestBody Personalization personalization) {
+        service.save(personalization);
+
+        return ResponseEntity.ok(new ApiResponseMongo("Personalização criada com sucesso"));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ApiResponseMongo> update(@PathVariable Long id, @RequestBody Personalization personalization) {
+        try {
+            Personalization updatedPersonalization = service.update(id, personalization);
+            return ResponseEntity.ok(new ApiResponseMongo("Personalização atualizada com sucesso"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponseMongo(e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResponseMongo> delete(@PathVariable Long id) {
+        service.deleteById(id);
+        return ResponseEntity.ok(new ApiResponseMongo("Personalização excluída com sucesso"));
+    }
+}
+

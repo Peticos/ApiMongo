@@ -22,10 +22,47 @@ public class Post {
     private String picture;
     private String caption;
     private List<BigInteger> pets;
+    @Field(name = "post_date")
+
     private Date postDate;
+    @Field(name = "is_mei")
     private boolean isMei;
+    private  Double price;
+    private String telephone;
+    @Field(name = "product_name")
+
+    private String productName;
 
     public Post() {
+    }
+
+    public Post(BigInteger id, BigInteger userId, int likes, int shares, String picture, String caption, List<BigInteger> pets, Date postDate, boolean isMei, Double price, String telephone, String productName) {
+        this.id = id;
+        this.userId = userId;
+        this.likes = likes;
+        this.shares = shares;
+        this.picture = picture;
+        this.caption = caption;
+        this.pets = pets;
+        this.postDate = postDate;
+        this.isMei = isMei;
+        this.price = price;
+        this.telephone = telephone;
+        this.productName = productName;
+    }
+
+    public Post(BigInteger id, BigInteger userId, int likes, int shares, String picture, String caption, Date postDate, boolean isMei, Double price, String telephone, String productName) {
+        this.id = id;
+        this.userId = userId;
+        this.likes = likes;
+        this.shares = shares;
+        this.picture = picture;
+        this.caption = caption;
+        this.postDate = postDate;
+        this.isMei = isMei;
+        this.price = price;
+        this.telephone = telephone;
+        this.productName = productName;
     }
 
     public Post(BigInteger id, BigInteger user_id, int likes, int shares, String picture, String caption, List<BigInteger> pets, Date post_date, boolean is_mei) {
@@ -40,12 +77,60 @@ public class Post {
         this.isMei = is_mei;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public BigInteger getId() {
         return id;
     }
 
     public void setId(BigInteger id) {
         this.id = id;
+    }
+
+    public BigInteger getUserId() {
+        return userId;
+    }
+
+    public void setUserId(BigInteger userId) {
+        this.userId = userId;
+    }
+
+    public Date getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
+
+    public boolean isMei() {
+        return isMei;
+    }
+
+    public void setMei(boolean mei) {
+        isMei = mei;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public BigInteger getUser_id() {

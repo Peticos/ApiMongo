@@ -6,11 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.logging.Logger;
 
 public interface PostRepository extends MongoRepository<Post, BigInteger> {
 
-
+    List<Post> findByIsMeiFalse();
+    List<Post> findByIsMeiTrue();
 
 }
 
