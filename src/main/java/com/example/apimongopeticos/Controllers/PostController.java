@@ -3,17 +3,20 @@ import com.example.apimongopeticos.Models.ApiResponseMongo;
 import com.example.apimongopeticos.Models.Post;
 import com.example.apimongopeticos.Service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -67,5 +70,60 @@ public class PostController {
     @GetMapping("/alternado")
     public List<Post> getAlternativePosts() {
         return postService.getAlternativePosts();
+    }
+
+    @Operation(summary = "Insere um like para o Post", description = "Adiciona o username a lista de likes")
+    @PutMapping("/{id}/like")
+    public ResponseEntity<?> addLike(
+            @Parameter(description = "ID do post", required = true) @PathVariable ObjectId id,
+            @Parameter(description = "Username de quem deu o like", required = true) @RequestParam String username) {
+
+        Optional<Post> optionalPost = postService.findById(id);
+
+        if (!optionalPost.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
+        }
+
+        Post post = optionalPost.get();
+
+        // Verifica se o username já deu like
+        if (!post.getLikes().contains(username)) {
+            post.getLikes().add(username);
+            postService.insertPost(post);
+            return ResponseEntity.ok("Like added successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User has already liked this post");
+        }
+    }
+
+    @Operation(summary = "Remove o like de um post", description = "Remove o username da lista de likes")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Like removed successfully",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "404", description = "Post not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "409", description = "User has not liked this post",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)))
+    })
+    @PutMapping("/{id}/dislike")
+    public ResponseEntity<?> removeLike(
+            @PathVariable ObjectId id,
+            @RequestParam String username
+    ) {
+        Optional<Post> optionalPost = postService.findById(id);
+
+        if (!optionalPost.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
+        }
+
+        Post post = optionalPost.get();
+
+        if (post.getLikes().contains(username)) {
+            post.getLikes().remove(username);
+            postService.insertPost(post);
+            return ResponseEntity.ok("Like removed successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User has not liked this post");
+        }
     }
 }
