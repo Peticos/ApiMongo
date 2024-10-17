@@ -2,6 +2,7 @@ package com.example.apimongopeticos.Models;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -14,10 +15,10 @@ import java.util.List;
 @Document(collection = "post")
 public class Post {
     @Id
-    private BigInteger id;
+    private ObjectId id;
     @Field(name = "user_id")
     private BigInteger userId;
-    private int likes;
+    private List likes;
     private int shares;
     private String picture;
     private String caption;
@@ -36,7 +37,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(BigInteger id, BigInteger userId, int likes, int shares, String picture, String caption, List<BigInteger> pets, Date postDate, boolean isMei, Double price, String telephone, String productName) {
+    public Post(ObjectId id, BigInteger userId, List likes, int shares, String picture, String caption, List<BigInteger> pets, Date postDate, boolean isMei, Double price, String telephone, String productName) {
         this.id = id;
         this.userId = userId;
         this.likes = likes;
@@ -51,7 +52,7 @@ public class Post {
         this.productName = productName;
     }
 
-    public Post(BigInteger id, BigInteger userId, int likes, int shares, String picture, String caption, Date postDate, boolean isMei, Double price, String telephone, String productName) {
+    public Post(ObjectId id, BigInteger userId, List likes, int shares, String picture, String caption, Date postDate, boolean isMei, Double price, String telephone, String productName) {
         this.id = id;
         this.userId = userId;
         this.likes = likes;
@@ -65,7 +66,7 @@ public class Post {
         this.productName = productName;
     }
 
-    public Post(BigInteger id, BigInteger user_id, int likes, int shares, String picture, String caption, List<BigInteger> pets, Date post_date, boolean is_mei) {
+    public Post(ObjectId id, BigInteger user_id, List likes, int shares, String picture, String caption, List<BigInteger> pets, Date post_date, boolean is_mei) {
         this.id = id;
         this.userId = user_id;
         this.likes = likes;
@@ -85,11 +86,11 @@ public class Post {
         this.productName = productName;
     }
 
-    public BigInteger getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -141,11 +142,11 @@ public class Post {
         this.userId = user_id;
     }
 
-    public int getLikes() {
+    public List getLikes() {
         return likes;
     }
 
-    public void setLikes(int likes) {
+    public void setLikes(List likes) {
         this.likes = likes;
     }
 

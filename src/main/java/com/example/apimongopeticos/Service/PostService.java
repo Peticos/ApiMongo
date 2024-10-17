@@ -1,5 +1,6 @@
 package com.example.apimongopeticos.Service;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.apimongopeticos.Models.Post;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -46,4 +48,7 @@ public class PostService {
         return result;
     }
 
+    public Optional<Post> findById(ObjectId id) {
+        return postRepository.findById(id);
+    }
 }
