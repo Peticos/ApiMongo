@@ -110,14 +110,6 @@ public class Post {
         this.postDate = postDate;
     }
 
-    public boolean isMei() {
-        return isMei;
-    }
-
-    public void setMei(boolean mei) {
-        isMei = mei;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -132,14 +124,6 @@ public class Post {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public BigInteger getUser_id() {
-        return userId;
-    }
-
-    public void setUser_id(BigInteger user_id) {
-        this.userId = user_id;
     }
 
     public List getLikes() {
@@ -180,14 +164,6 @@ public class Post {
 
     public void setPets(List<BigInteger> pets) {
         this.pets = pets;
-    }
-
-    public Date getPost_date() {
-        return postDate;
-    }
-
-    public void setPost_date(Date post_date) {
-        this.postDate = post_date;
     }
 
     public boolean isIs_mei() {
