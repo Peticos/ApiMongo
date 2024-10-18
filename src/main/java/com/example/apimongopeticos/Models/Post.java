@@ -15,7 +15,7 @@ import java.util.List;
 @Document(collection = "post")
 public class Post {
     @Id
-    private ObjectId id;
+    private String id;
     @Field(name = "user_id")
     private BigInteger userId;
     private List likes;
@@ -37,7 +37,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(ObjectId id, BigInteger userId, List likes, int shares, String picture, String caption, List<BigInteger> pets, Date postDate, boolean isMei, Double price, String telephone, String productName) {
+    public Post(String id, BigInteger userId, List likes, int shares, String picture, String caption, List<BigInteger> pets, Date postDate, boolean isMei, Double price, String telephone, String productName) {
         this.id = id;
         this.userId = userId;
         this.likes = likes;
@@ -52,7 +52,7 @@ public class Post {
         this.productName = productName;
     }
 
-    public Post(ObjectId id, BigInteger userId, List likes, int shares, String picture, String caption, Date postDate, boolean isMei, Double price, String telephone, String productName) {
+    public Post(String id, BigInteger userId, List likes, int shares, String picture, String caption, Date postDate, boolean isMei, Double price, String telephone, String productName) {
         this.id = id;
         this.userId = userId;
         this.likes = likes;
@@ -66,7 +66,7 @@ public class Post {
         this.productName = productName;
     }
 
-    public Post(ObjectId id, BigInteger user_id, List likes, int shares, String picture, String caption, List<BigInteger> pets, Date post_date, boolean is_mei) {
+    public Post(String id, BigInteger user_id, List likes, int shares, String picture, String caption, List<BigInteger> pets, Date post_date, boolean is_mei) {
         this.id = id;
         this.userId = user_id;
         this.likes = likes;
@@ -86,11 +86,11 @@ public class Post {
         this.productName = productName;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
