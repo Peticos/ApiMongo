@@ -7,16 +7,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Auth {
 
     @Id
-    private String Id;
+    private String id;
     private String email;
     private String senha;
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getEmail() {
@@ -36,7 +36,12 @@ public class Auth {
     }
 
     public Auth(String id, String email, String senha) {
-        Id = id;
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public Auth(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }
