@@ -31,12 +31,10 @@ public class AuthController {
 
     @Operation(summary = "Autenticar usuário", description = "Este endpoint autentica um usuário comparando email e senha.")
     @PostMapping("/login")
-    public ResponseEntity<ApiResponseMongo> loginUser(@RequestBody Auth auth) {
-        boolean isAuthenticated = authService.authenticate(auth);
-        if (isAuthenticated) {
-            return  ResponseEntity.ok(new ApiResponseMongo("Login realizado com sucesso"));
-        } else {
-            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponseMongo("Email ou senha incorretos"));
-        }
+    public Integer loginUser(@RequestBody Auth auth) {
+        Integer isAuthenticated = authService.authenticate(auth);
+
+        return  isAuthenticated;
+
     }
 }

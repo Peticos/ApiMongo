@@ -26,6 +26,10 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    public List<Post> findByUserId(Integer id){
+        return postRepository.findByUserId(id);
+    }
+
 
 
     public List<Post> getAlternativePosts() {

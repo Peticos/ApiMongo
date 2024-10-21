@@ -126,4 +126,9 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User has not liked this post");
         }
     }
+
+    @GetMapping("/findbyuserid/{id}")
+    public List<Post> findByUserId(@PathVariable Integer idUser) {
+        return postService.findByUserId(idUser); // Call the service method to fetch posts by user ID
+    }
 }
