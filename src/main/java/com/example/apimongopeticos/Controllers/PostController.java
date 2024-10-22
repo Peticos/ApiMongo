@@ -131,4 +131,10 @@ public class PostController {
     public List<Post> findByUserId(@PathVariable String id) {
         return postService.findByUserId(id); // Call the service method to fetch posts by user ID
     }
+
+    @PutMapping("/share/{id}")
+    public ResponseEntity<ApiResponseMongo> incrementPostShares(@PathVariable("id") String postId) {
+        postService.share(postId);
+        return ResponseEntity.ok(new ApiResponseMongo("Compartilhado com sucesso"));
+    }
 }
