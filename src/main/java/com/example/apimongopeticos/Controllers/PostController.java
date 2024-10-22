@@ -128,7 +128,7 @@ public class PostController {
     }
 
     @GetMapping("/findbyuserid/{id}")
-    public List<Post> findByUserId(@PathVariable Integer idUser) {
-        return postService.findByUserId(idUser); // Call the service method to fetch posts by user ID
+    public List<Post> findByUserId(@PathVariable String id) {
+        return postService.findByUserId(id); // Call the service method to fetch posts by user ID
     }
 }
