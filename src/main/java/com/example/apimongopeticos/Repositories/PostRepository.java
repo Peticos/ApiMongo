@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 public interface PostRepository extends MongoRepository<Post, ObjectId> {
@@ -17,5 +18,6 @@ public interface PostRepository extends MongoRepository<Post, ObjectId> {
     List<Post> findByUserId(String id);
 
 
+    Optional<Post> findById(String objectId);
 }
 

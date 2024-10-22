@@ -31,6 +31,20 @@ public class PostService {
     }
 
 
+    public void share(String id) {
+        // Busca o post pelo ID
+        Optional<Post> optionalPost = postRepository.findById(id);
+
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            // Incrementa o número de compartilhamentos
+            post.setShares(post.getShares() + 1);
+            // Salva o post atualizado no banco de dados
+            postRepository.save(post);
+        } else {
+            throw new RuntimeException("Post não encontrado com o ID: ");
+        }
+    }
 
     public List<Post> getAlternativePosts() {
         List<Post> meiFalsePosts = postRepository.findByIsMeiFalse();
