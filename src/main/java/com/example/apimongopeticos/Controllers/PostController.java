@@ -74,14 +74,14 @@ public class PostController {
 
     @Operation(summary = "Insere um like para o Post", description = "Adiciona o username a lista de likes")
     @PutMapping("/{id}/like")
-    public ResponseEntity<?> addLike(
+    public ResponseEntity<ApiResponseMongo> addLike(
             @Parameter(description = "ID do post", required = true) @PathVariable ObjectId id,
             @Parameter(description = "Username de quem deu o like", required = true) @RequestParam String username) {
 
         Optional<Post> optionalPost = postService.findById(id);
 
         if (!optionalPost.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponseMongo("Post not found"));
         }
 
         Post post = optionalPost.get();
@@ -90,9 +90,9 @@ public class PostController {
         if (!post.getLikes().contains(username)) {
             post.getLikes().add(username);
             postService.insertPost(post);
-            return ResponseEntity.ok("Like added successfully");
+            return ResponseEntity.ok(new ApiResponseMongo("Like added successfully"));
         } else {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("User has already liked this post");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseMongo("User has already liked this post"));
         }
     }
 
@@ -106,14 +106,14 @@ public class PostController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)))
     })
     @PutMapping("/{id}/dislike")
-    public ResponseEntity<?> removeLike(
+    public ResponseEntity<ApiResponseMongo> removeLike(
             @PathVariable ObjectId id,
             @RequestParam String username
     ) {
         Optional<Post> optionalPost = postService.findById(id);
 
         if (!optionalPost.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponseMongo("Post not found"));
         }
 
         Post post = optionalPost.get();
@@ -121,9 +121,9 @@ public class PostController {
         if (post.getLikes().contains(username)) {
             post.getLikes().remove(username);
             postService.insertPost(post);
-            return ResponseEntity.ok("Like removed successfully");
+            return ResponseEntity.ok(new ApiResponseMongo("Like removed successfully"));
         } else {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("User has not liked this post");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseMongo("User has not liked this post"));
         }
     }
 
