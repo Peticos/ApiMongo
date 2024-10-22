@@ -1,7 +1,8 @@
 name: Java CI with Maven
+
 on:
   pull_request:
-    branches: [ "DEV" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -18,3 +19,11 @@ jobs:
         cache: maven
     - name: Compilando Maven
       run: mvn -B package -DskipTests --file pom.xml
+
+    - name: Render Deploy Action
+      uses: johnbeynon/render-deploy-action@v0.0.8
+      with:
+        service-id: ${{ secrets.ServiceId }}
+        api-key: ${{ secrets.ApiKeyMain }}
+
+          
