@@ -14,7 +14,7 @@ public interface PostRepository extends MongoRepository<Post, ObjectId> {
 
     List<Post> findByIsMeiFalse();
     List<Post> findByIsMeiTrue();
-    List<Post> findByUserId(Integer id);
+    List<Post> findByUserId(String id);
 
 
 }

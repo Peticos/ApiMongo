@@ -26,7 +26,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> findByUserId(Integer id){
+    public List<Post> findByUserId(String id){
         return postRepository.findByUserId(id);
     }
 
