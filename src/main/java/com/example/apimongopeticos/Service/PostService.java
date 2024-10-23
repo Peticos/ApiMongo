@@ -1,10 +1,8 @@
 package com.example.apimongopeticos.Service;
 
-import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.example.apimongopeticos.Models.Post;
 import com.example.apimongopeticos.Repositories.PostRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,15 +29,15 @@ public class PostService {
     }
 
 
-    public void share(String id) {
+    public void share(String id, String username) {
         // Busca o post pelo ID
         Optional<Post> optionalPost = postRepository.findById(id);
 
         if (optionalPost.isPresent()) {
+
             Post post = optionalPost.get();
-            // Incrementa o número de compartilhamentos
-            post.setShares(post.getShares() + 1);
-            // Salva o post atualizado no banco de dados
+
+            post.getShares().add(username);
             postRepository.save(post);
         } else {
             throw new RuntimeException("Post não encontrado com o ID: ");
