@@ -1,12 +1,9 @@
 package com.example.apimongopeticos.Service;
 
 import com.example.apimongopeticos.Models.Auth;
-import com.example.apimongopeticos.Models.Post;
 import com.example.apimongopeticos.Repositories.AuthRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AuthService {
@@ -38,4 +35,5 @@ public class AuthService {
         }
         return -1;
     }
+
 }
