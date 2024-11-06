@@ -119,11 +119,23 @@ public class PostController {
         }
     }
 
+    @Operation(summary = "Buscar posts por ID do usuário", description = "Retorna uma lista de posts associados a um determinado ID de usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Posts encontrados"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @GetMapping("/findbyuserid/{id}")
     public List<Post> findByUserId(@PathVariable BigInteger id) {
         return postService.findByUser_id(id); // Call the service method to fetch posts by user ID
     }
 
+    @Operation(summary = "Compartilhar post", description = "Incrementa o username na lista de compartilhamento de um post pelo ID do post e pelo username de usuário que compartilhou.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Compartilhado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Post não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @PutMapping("/{id}/share")
     public ResponseEntity<ApiResponseMongo> incrementPostShares(@PathVariable("id") String postId, @RequestParam String username)  {
         postService.share(postId,username);
