@@ -6,7 +6,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,10 +24,9 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> findByUser_id(String id){
-        return postRepository.findByUser_id(id);
+    public List<Post> findByUser_id(BigInteger id){
+        return postRepository.findByUserId(id);
     }
-
 
     public void share(String id, String username) {
         // Busca o post pelo ID
@@ -44,25 +43,6 @@ public class PostService {
         }
     }
 
-    public List<Post> getAlternativePosts() {
-        List<Post> meiFalsePosts = postRepository.findByIs_meiFalse();
-        List<Post> meiTruePosts = postRepository.findByIs_meiTrue();
-
-        List<Post> result = new ArrayList<>();
-        int minLength = Math.min(meiFalsePosts.size() / 3, meiTruePosts.size());
-
-        for (int i = 0; i < minLength; i++) {
-            // Adiciona 3 posts onde is_mei é false
-            result.add(meiFalsePosts.get(i * 3));
-            result.add(meiFalsePosts.get(i * 3 + 1));
-            result.add(meiFalsePosts.get(i * 3 + 2));
-
-
-            result.add(meiTruePosts.get(i));
-        }
-
-        return result;
-    }
 
     public Optional<Post> findById(ObjectId id) {
         return postRepository.findById(id);

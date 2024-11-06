@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,15 +63,6 @@ public class PostController {
         return ResponseEntity.ok(new ApiResponseMongo("Post inserido com sucesso!"));
     }
 
-    @Operation(summary = "Retorna posts alternados", description = "Retorna posts intercalados, alternando entre 3 posts normais e 1 post de produto.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Posts alternados retornados com sucesso"),
-            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
-    })
-    @GetMapping("/alternado")
-    public List<Post> getAlternativePosts() {
-        return postService.getAlternativePosts();
-    }
 
     @Operation(summary = "Insere um like para o Post", description = "Adiciona o username a lista de likes")
     @PutMapping("/{id}/like")
@@ -128,7 +120,7 @@ public class PostController {
     }
 
     @GetMapping("/findbyuserid/{id}")
-    public List<Post> findByUserId(@PathVariable String id) {
+    public List<Post> findByUserId(@PathVariable BigInteger id) {
         return postService.findByUser_id(id); // Call the service method to fetch posts by user ID
     }
 

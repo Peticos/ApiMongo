@@ -1,7 +1,9 @@
 package com.example.apimongopeticos.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -12,7 +14,9 @@ import java.util.List;
 public class Post {
     @Id
     private String id;
-    private BigInteger user_id;
+    @Field("user_id") // Mapeia para "user_id" no MongoDB
+    @JsonProperty("user_id") // Define "user_id" no JSON
+    private BigInteger userId;
     private List likes;
     private List shares;
     private String picture;
@@ -31,7 +35,7 @@ public class Post {
 
     public Post(String id, BigInteger userId, List likes, List shares, String picture, String caption, List<BigInteger> pets, Date postDate, boolean isMei, Double price, String telephone, String productName) {
         this.id = id;
-        this.user_id = userId;
+        this.userId = userId;
         this.likes = likes;
         this.shares = shares;
         this.picture = picture;
@@ -46,7 +50,7 @@ public class Post {
 
     public Post(String id, BigInteger userId, List likes, List shares, String picture, String caption, Date postDate, boolean isMei, Double price, String telephone, String productName) {
         this.id = id;
-        this.user_id = userId;
+        this.userId = userId;
         this.likes = likes;
         this.shares = shares;
         this.picture = picture;
@@ -60,7 +64,7 @@ public class Post {
 
     public Post(String id, BigInteger user_id, List likes, List shares, String picture, String caption, List<BigInteger> pets, Date post_date, boolean is_mei) {
         this.id = id;
-        this.user_id = user_id;
+        this.userId = user_id;
         this.likes = likes;
         this.shares = shares;
         this.picture = picture;
@@ -87,11 +91,11 @@ public class Post {
     }
 
     public BigInteger getUser_id() {
-        return user_id;
+        return userId;
     }
 
     public void setUser_id(BigInteger user_id) {
-        this.user_id = user_id;
+        this.userId = user_id;
     }
 
     public Date getPost_date() {
