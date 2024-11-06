@@ -24,8 +24,8 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> findByUserId(String id){
-        return postRepository.findByUserId(id);
+    public List<Post> findByUser_id(String id){
+        return postRepository.findByUser_id(id);
     }
 
 
@@ -45,8 +45,8 @@ public class PostService {
     }
 
     public List<Post> getAlternativePosts() {
-        List<Post> meiFalsePosts = postRepository.findByIsMeiFalse();
-        List<Post> meiTruePosts = postRepository.findByIsMeiTrue();
+        List<Post> meiFalsePosts = postRepository.findByIs_meiFalse();
+        List<Post> meiTruePosts = postRepository.findByIs_meiTrue();
 
         List<Post> result = new ArrayList<>();
         int minLength = Math.min(meiFalsePosts.size() / 3, meiTruePosts.size());
