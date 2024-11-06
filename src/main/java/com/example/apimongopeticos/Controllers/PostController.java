@@ -129,7 +129,7 @@ public class PostController {
 
     @GetMapping("/findbyuserid/{id}")
     public List<Post> findByUserId(@PathVariable String id) {
-        return postService.findByUserId(id); // Call the service method to fetch posts by user ID
+        return postService.findByUser_id(id); // Call the service method to fetch posts by user ID
     }
 
     @PutMapping("/{id}/share")
