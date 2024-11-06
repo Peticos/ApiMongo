@@ -2,7 +2,6 @@ package com.example.apimongopeticos.Models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -13,74 +12,70 @@ import java.util.List;
 public class Post {
     @Id
     private String id;
-    @Field(name = "user_id")
-    private BigInteger userId;
+    private BigInteger user_id;
     private List likes;
     private List shares;
     private String picture;
     private String caption;
     private List<BigInteger> pets;
-    @Field(name = "post_date")
 
-    private Date postDate;
-    @Field(name = "is_mei")
-    private boolean isMei;
+    private Date post_date;
+    private boolean is_mei;
     private  Double price;
     private String telephone;
-    @Field(name = "product_name")
 
-    private String productName;
+    private String product_name;
 
     public Post() {
     }
 
     public Post(String id, BigInteger userId, List likes, List shares, String picture, String caption, List<BigInteger> pets, Date postDate, boolean isMei, Double price, String telephone, String productName) {
         this.id = id;
-        this.userId = userId;
+        this.user_id = userId;
         this.likes = likes;
         this.shares = shares;
         this.picture = picture;
         this.caption = caption;
         this.pets = pets;
-        this.postDate = postDate;
-        this.isMei = isMei;
+        this.post_date = postDate;
+        this.is_mei = isMei;
         this.price = price;
         this.telephone = telephone;
-        this.productName = productName;
+        this.product_name = productName;
     }
 
     public Post(String id, BigInteger userId, List likes, List shares, String picture, String caption, Date postDate, boolean isMei, Double price, String telephone, String productName) {
         this.id = id;
-        this.userId = userId;
+        this.user_id = userId;
         this.likes = likes;
         this.shares = shares;
         this.picture = picture;
         this.caption = caption;
-        this.postDate = postDate;
-        this.isMei = isMei;
+        this.post_date = postDate;
+        this.is_mei = isMei;
         this.price = price;
         this.telephone = telephone;
-        this.productName = productName;
+        this.product_name = productName;
     }
 
     public Post(String id, BigInteger user_id, List likes, List shares, String picture, String caption, List<BigInteger> pets, Date post_date, boolean is_mei) {
         this.id = id;
-        this.userId = user_id;
+        this.user_id = user_id;
         this.likes = likes;
         this.shares = shares;
         this.picture = picture;
         this.caption = caption;
         this.pets = pets;
-        this.postDate = post_date;
-        this.isMei = is_mei;
+        this.post_date = post_date;
+        this.is_mei = is_mei;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getProduct_name() {
+        return product_name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 
     public String getId() {
@@ -91,20 +86,20 @@ public class Post {
         this.id = id;
     }
 
-    public BigInteger getUserId() {
-        return userId;
+    public BigInteger getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(BigInteger userId) {
-        this.userId = userId;
+    public void setUser_id(BigInteger user_id) {
+        this.user_id = user_id;
     }
 
-    public Date getPostDate() {
-        return postDate;
+    public Date getPost_date() {
+        return post_date;
     }
 
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
+    public void setPost_date(Date post_date) {
+        this.post_date = post_date;
     }
 
     public Double getPrice() {
@@ -164,10 +159,10 @@ public class Post {
     }
 
     public boolean isIs_mei() {
-        return isMei;
+        return is_mei;
     }
 
     public void setIs_mei(boolean is_mei) {
-        this.isMei = is_mei;
+        this.is_mei = is_mei;
     }
 }
